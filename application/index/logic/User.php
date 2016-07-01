@@ -51,13 +51,13 @@ class User {
 		    $user['emailsig_time'] = time();
 		    $code = $user['emailsig'];
 			//实例化model层的User
-			$user_model = new UserModel;
-			$user_model->data($user);
+			$user_model = new UserModel($user);
+			//$user_model->data($user);
 			//发送确认邮件
 			$title = '注册成功确认邮件';
 			$body = '<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/index/Register/activate/code/'.$code.'/uname/'.$user['uname'].'">'.$code.'</a>';
 			$this->sendEmail('shikunqiang@sina.com',$user['email'],$title,$body);
-			return $user_model->allowField(true)
+			return $user_model->allowField(['id','uname','pass','uptime','email','salt','emailsig','emailsig_time'])
 			                  ->save();
 		}else{
 			return false;
