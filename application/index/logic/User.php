@@ -55,8 +55,8 @@ class User {
 			//$user_model->data($user);
 			//发送确认邮件
 			$title = '注册成功确认邮件';
-			$body = '<a href="http://'.$_SERVER['HTTP_HOST'].'/index.php/index/Register/activate/code/'.$code.'/uname/'.$user['uname'].'">'.$code.'</a>';
-			$this->sendEmail('shikunqiang@sina.com',$user['email'],$title,$body);
+			$body = '<a href="'.url('http://'.$_SERVER['HTTP_HOST'].'/index.php/index/Register/activate/code/'.$code.'/uname/'.$user['uname']).'">'.$code.'</a>';
+			$this->sendEmail('shikunqiang@miaozhunpin.com',$user['email'],$title,$body);
 			return $user_model->allowField(['id','uname','pass','uptime','email','salt','emailsig','emailsig_time'])
 			                  ->save();
 		}else{
@@ -161,7 +161,7 @@ class User {
 	 */
 	public function sendEmail($from,$to,$title,$body){
 	    $mail = new Email();
-	    $mail->setServer("smtp.sina.com", "shikunqiang@sina.com", "209833.dnfhs");
+	    $mail->setServer("smtp.miaozhunpin.com", "shikunqiang@miaozhunpin.com", "0453.miaozhun");
 	    $mail->setFrom($from);
 	    $mail->setReceiver($to);
 	    //$mail->setReceiver("XXXXX@XXXXX");

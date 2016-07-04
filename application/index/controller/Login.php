@@ -63,8 +63,8 @@ class Login extends Controller
 	public function test(){
 	    //return UtilStr::rand();
 	    $mail = new Email();
-	    $mail->setServer("smtp.sina.com", "shikunqiang@sina.com", "209833.dnfhs");
-	    $mail->setFrom("shikunqiang@sina.com");
+	    $mail->setServer("smtp.miaozhunpin.com", "shikunqiang@miaozhunpin.com", "0453.miaozhun");
+	    $mail->setFrom("shikunqiang@miaozhunpin.com");
 	    $mail->setReceiver("1009735870@qq.com");
 	    //$mail->setReceiver("XXXXX@XXXXX");
 	    //$mail->setCc("675517302@qq.com");
@@ -72,7 +72,7 @@ class Login extends Controller
 	    //$mail->setBcc("675517302@qq.com");
 	    //$mail->setBcc("");
 	    //$mail->setBcc("");
-	    $mail->setMailInfo("test", "<a href=\"http://baidu.com\">baidu</a>", "");
+	    $mail->setMailInfo("判断jkjk用", "判断用9898989户是否99为登录状态", "");
 	    $mail->sendMail();
 	}
 	/**

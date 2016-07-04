@@ -319,6 +319,8 @@ class Email {
             }
         }
         $header .= "Subject: " . $this->_subject ."\r\n";
+        $domain = explode('@',$this->_from)[1];
+        $header .= "Message-ID: <".date('YmdHis',time())."@{$domain}\r\n";
         if(isset($this->_attachment)) {
             //含有附件的邮件头需要声明成这个
             $header .= "Content-Type: multipart/mixed;\r\n";
@@ -332,6 +334,7 @@ class Email {
             $header .= "Content-Type: multipart/alternative;\r\n";
         }
         //邮件头分隔符
+        
         $header .= "\t" . 'boundary="' . $separator . '"';
         $header .= "\r\nMIME-Version: 1.0\r\n";
         $header .= "\r\n--" . $separator . "\r\n";
