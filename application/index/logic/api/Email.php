@@ -253,7 +253,8 @@ class Email {
         $command[] = array("MAIL FROM:<" . $this->_from . ">\r\n", 250);
         $separator = "----=_Part_" . md5($this->_from . time()) . uniqid(); //分隔符
         //设置发件人
-        $header = "FROM: test<" . $this->_from . ">\r\n";
+        $nickname = explode('@',$this->_from)[0];
+        $header = "FROM: {$nickname}<" . $this->_from . ">\r\n";
         //设置收件人
         if(is_array($this->_to)) {
             $count = count($this->_to);
