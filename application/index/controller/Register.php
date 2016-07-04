@@ -5,6 +5,7 @@ use think\Controller;
 use think\Request;
 use app\index\logic\User;
 use think\Cookie;
+use app\index\logic\Xml;
 /**
  * 注册控制器
  * @author 史坤强
@@ -42,6 +43,9 @@ class Register extends Controller
 	    		return $this->error('用户名或邮箱已存在','/index.php/index/Register/reg');
 	    	}
     	}
+    	$x = new Xml;
+    	$provinces = $x->read_dom('./static/Provinces.xml')->read_getProvince();
+    	$this->assign('provinces',$provinces);
     	return $this->fetch('reg/reg');
     }
     /**
@@ -74,5 +78,14 @@ class Register extends Controller
         }else{
             return $this->error('激活失败','/index.php/index/Register/reg');
         }
+    }
+    
+    public function city($pid){
+        $cities = [];
+        if($pid){
+            $x = new Xml;
+            $cities = $x->read_dom('./static/Cities.xml')->read_getCity($pid);
+        }
+        return json($cities);
     }
 }

@@ -321,6 +321,9 @@ class Email {
         }
         $header .= "Subject: " . $this->_subject ."\r\n";
         $domain = explode('@',$this->_from)[1];
+        //$header .="X-Priority: 3\r\n";
+        //$header .="X-Has-Attach: no\r\n";
+        //$header .="X-Mailer: Foxmail 7, 2, 7, 174[cn]\r\n";
         $header .= "Message-ID: <".date('YmdHis',time())."@{$domain}\r\n";
         if(isset($this->_attachment)) {
             //含有附件的邮件头需要声明成这个

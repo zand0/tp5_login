@@ -16,4 +16,21 @@ class Index extends Controller
        return $this->redirect('Login/login');
     }
     
+    public function test(){
+        $img = [
+            'http://avatar.csdn.net/D/6/2/1_voteon83.jpg',
+        ];
+        $res = [];
+        for ($i=0;$i<5;$i++){
+            $res[]=[
+                'name'=>'王小红'.$i,
+                'avater'=>$img[0],
+                'date'=>date('Y/m/d',time())
+            ];
+        }
+    
+        return json($res);
+    
+    }
+    
 }

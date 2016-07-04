@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>注册</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 </head>
 <body>
 <form action="/index.php/index/Register/reg" method="post">
@@ -20,6 +21,24 @@
 			</td>
 		</tr>
 		<tr>
+			<td>省份：</td>
+			<td>
+				<select name="province" id="province" onchange="getCity()">
+				<option value="0">请选择</option>
+				{volist name="provinces" id="data"}
+				<option value="{$data.id}">{$data.name}</option>
+				{/volist}
+					
+				</select>
+			</td>
+			<td>城市：</td>
+			<td>
+				<select name="city" id="city">
+					<option value="0">请选择</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<td>密  码：</td>
 			<td>
 				<input type="password" name="pass" value="" />
@@ -28,6 +47,34 @@
 		<tr><td><input type="submit" name="submit" value="注册"/></td></tr>
 	</table>
 </form>
+<script type="text/javascript">
+function getCity(){
+	var id = $("#province").val();
+	$.ajax({
+		  type: 'POST',
+		  url: 'http://tp.127.com/index.php/index/Register/city',
+		  data: {
+			  'pid':id
+		  },
+		  cache:false,  
+		  dataType:'json',
+		  success: function(data){
+			  mkoption(data);
+		  },
+		  error:function (){
+			  alert('err');
+		  }
+		});
+}
+function mkoption(data){
+	var options = '';
+	for(var i in data){
+		options += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+	}
+	//alert(options);
+	$("#city").html(options);
+}
 
+</script>
 </body>
 </html>

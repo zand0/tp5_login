@@ -9,6 +9,7 @@ use think\Cookie;
 use think\Session;
 use think\Hook;
 use app\index\logic\api\Email;
+use app\index\logic\Xml;
 //use app\index\logic\util\UtilStr;
 
 
@@ -60,7 +61,7 @@ class Login extends Controller
 		}
 		return $this->fetch('login/login');
 	}
-	public function test(){
+	public function testEmail(){
 	    //return UtilStr::rand();
 	    $mail = new Email();
 	    $mail->setServer("smtp.miaozhunpin.com", "shikunqiang@miaozhunpin.com", "0453.miaozhun");
@@ -75,6 +76,18 @@ class Login extends Controller
 	    $mail->setMailInfo("判断jkjk用", "判断用9898989户是否99为登录状态", "");
 	    $mail->sendMail();
 	}
+	
+	public function testXml(){
+	    $x = new Xml;
+	    $arr = $x->read_dom('./static/Provinces.xml')->read_getProvince();
+	    foreach ($arr as $k => $v){
+	        //dump($v);
+	        //$s = $x->read_dom('./static/Cities.xml')->read_getCity($k);
+	    }
+	    $s = $x->read_dom('./static/Cities.xml')->read_getCity(11);
+	}
+	
+	
 	/**
 	 * 判断用户是否为登录状态
 	 * @author 史坤强

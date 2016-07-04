@@ -57,7 +57,7 @@ class User {
 			$title = '注册成功确认邮件';
 			$body = '<a href="'.url('http://'.$_SERVER['HTTP_HOST'].'/index.php/index/Register/activate/code/'.$code.'/uname/'.$user['uname']).'">'.$code.'</a>';
 			$this->sendEmail('shikunqiang@miaozhunpin.com',$user['email'],$title,$body);
-			return $user_model->allowField(['id','uname','pass','uptime','email','salt','emailsig','emailsig_time'])
+			return $user_model->allowField(['id','uname','pass','uptime','email','salt','emailsig','emailsig_time','city','province'])
 			                  ->save();
 		}else{
 			return false;
