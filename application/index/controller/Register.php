@@ -44,7 +44,7 @@ class Register extends Controller
 	    	}
     	}
     	$x = new Xml;
-    	$provinces = $x->read_dom('./static/Provinces.xml')->read_getProvince();
+    	$provinces = $x->read_dom('./static/Provinces.xml')->read_getProvince();//dump($provinces);
     	$this->assign('provinces',$provinces);
     	return $this->fetch('reg/reg');
     }
@@ -81,11 +81,17 @@ class Register extends Controller
     }
     
     public function city($pid){
+        $res = [];
         $cities = [];
         if($pid){
             $x = new Xml;
             $cities = $x->read_dom('./static/Cities.xml')->read_getCity($pid);
+            $res['status'] = 1;
+            $res['list'] = $cities;
+        }else{
+            $res['status'] = 0;
+            $res['list'] = $cities;
         }
-        return json($cities);
+        return json($res);
     }
 }
